@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     int quantity = 0;
     int oneCupPrice = 5;
+    String name = "Evgeniy";
 
 
     @Override
@@ -36,11 +37,15 @@ public class MainActivity extends AppCompatActivity {
      */
     public void submitOrder(View view) {
 
-        int price = (quantity * 5);
-        String priceMessage = "Total price $" + price;
-        priceMessage = priceMessage + "\n Thank you!";
-        displayMessage(priceMessage);
-        calculatePrice(quantity);
+        int price = calculatePrice(quantity);
+        displayMessage(createOrderSummary(price, name));
+
+    }
+
+    private String createOrderSummary (int price, String name) {
+
+        String message = "Name: " + name + "\nQuantity: " + quantity + "\nTotal: " + price + " $" + "\nThank you!";
+        return message;
     }
 
     private int calculatePrice(int quantity) {
@@ -60,25 +65,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * This method displays the given quantity value on the screen.
-     * <p>
-     * private void display(int number) {
-     * TextView quantityTextView = (TextView) findViewById(R.id.QUA);
-     * quantityTextView.setText("" + number);
-     * }
-     * <p>
-     * /**
-     * This method displays the given price on the screen.
-     * <p>
-     * private void displayPrice(int number) {
-     * TextView priceTextView = (TextView) findViewById(R.id.PTV);
-     * priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-     * }
-     */
 
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.PTV);
+        TextView priceTextView = (TextView) findViewById(R.id.order_summary_text_view);
         priceTextView.setText(message);
     }
 

@@ -62,7 +62,7 @@
         />
 
     <TextView
-        android:id="@+id/PTV"
+        android:id="@+id/order_summary_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -79,7 +79,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:onClick="submitOrder"
-        android:text="Order"
+        android:text="Order Summary"
         />
 
 
