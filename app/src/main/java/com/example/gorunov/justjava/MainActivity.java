@@ -11,6 +11,7 @@ package com.example.gorunov.justjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     int quantity = 0;
     int oneCupPrice = 5;
     String name = "Evgeniy";
+    boolean hasWhippedCream;
+
+
 
 
     @Override
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String createOrderSummary (int price, String name) {
 
-        String message = "Name: " + name + "\nQuantity: " + quantity + "\nTotal: " + price + " $" + "\nThank you!";
+        String message = "Name: " + name + "\nAdd whipped Cream: " + hasWhippedCream + "\nQuantity: " + quantity + "\nTotal: " + price + " $" + "\nThank you!";
         return message;
     }
 
@@ -65,6 +69,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public boolean checkWhippedCream (View view){
+        if (addWhippedCream() == false){
+            hasWhippedCream = false;
+        }else hasWhippedCream = true;
+        return hasWhippedCream;
+    }
+
+
+
 
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.order_summary_text_view);
@@ -79,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
     private void displayDecrement(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.QUA);
         quantityTextView.setText("" + number);
+    }
+
+    private boolean addWhippedCream (){
+        CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream);
+        return hasWhippedCream = whippedCreamCheckBox.isChecked();
+
     }
 
 
