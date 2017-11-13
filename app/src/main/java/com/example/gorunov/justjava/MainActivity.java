@@ -10,8 +10,10 @@ package com.example.gorunov.justjava;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -23,11 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
     int quantity = 0;
     int oneCupPrice = 5;
-    String name = "Evgeniy";
+    Editable name;
     boolean hasWhippedCream;
-
-
-
+    boolean hasChocolate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,25 +35,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
     /**
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
 
         int price = calculatePrice(quantity);
-        displayMessage(createOrderSummary(price, name));
+        displayMessage(createOrderSummary(price));
 
     }
 
-    private String createOrderSummary (int price, String name) {
-
-        String message = "Name: " + name + "\nAdd whipped Cream: " + hasWhippedCream + "\nQuantity: " + quantity + "\nTotal: " + price + " $" + "\nThank you!";
+    private String createOrderSummary (int price) {
+        tName();
+        addWhippedCream();
+        addChocolate();
+        String message = "Name: " + name + "\nAdd whipped cream? " + hasWhippedCream + "\nAdd chocolate? " + hasChocolate + "\nQuantity: " + quantity + "\nTotal: " + price + " $" + "\nThank you!";
         return message;
     }
 
     private int calculatePrice(int quantity) {
-        quantity = quantity * oneCupPrice;
+        if (hasChocolate == false && hasWhippedCream == false) {
+            quantity = quantity * oneCupPrice;
+        }else if (hasChocolate == true && hasWhippedCream == false){
+            quantity = quantity * (oneCupPrice + 2);
+        }else if (hasChocolate == false && hasWhippedCream == true){
+            quantity = quantity * (oneCupPrice + 1);
+        }else quantity = quantity * (oneCupPrice + 3);
         return quantity;
     }
 
@@ -69,28 +76,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public boolean checkWhippedCream (View view){
-        if (addWhippedCream() == false){
-            hasWhippedCream = false;
-        }else hasWhippedCream = true;
-        return hasWhippedCream;
-    }
-
-
-
 
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        TextView priceTextView = findViewById(R.id.order_summary_text_view);
         priceTextView.setText(message);
     }
 
     private void displayIncrement(int number) {
-        TextView quantityTextView = (TextView) findViewById(R.id.QUA);
+        TextView quantityTextView = findViewById(R.id.QUA);
         quantityTextView.setText("" + number);
     }
 
     private void displayDecrement(int number) {
-        TextView quantityTextView = (TextView) findViewById(R.id.QUA);
+        TextView quantityTextView = findViewById(R.id.QUA);
         quantityTextView.setText("" + number);
     }
 
@@ -98,6 +96,16 @@ public class MainActivity extends AppCompatActivity {
         CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream);
         return hasWhippedCream = whippedCreamCheckBox.isChecked();
 
+    }
+
+    private boolean addChocolate (){
+        CheckBox chocolateCheckBox = findViewById(R.id.chocolate);
+        return  hasChocolate = chocolateCheckBox.isChecked();
+    }
+
+    private Editable tName (){
+        EditText editTextName = findViewById(R.id.text_name);
+        return name = editTextName.getText();
     }
 
 
