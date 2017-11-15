@@ -33,7 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
-            android:text="Whipped cream" />
+            android:text="Whipped cream"
+            android:onClick="chekCream"
+            />
 
         <CheckBox
             android:id="@+id/chocolate"
@@ -42,6 +44,7 @@
             android:text="Chocolate"
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="8dp"
+            android:onClick="chekChocolate"
             />
 
         <TextView

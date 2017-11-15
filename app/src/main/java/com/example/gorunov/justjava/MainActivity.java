@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     boolean hasWhippedCream;
     boolean hasChocolate;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +46,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void chekCream (View view){
+        addWhippedCream();
+    }
+
+    public void chekChocolate (View view){
+        addChocolate();
+    }
+
     private String createOrderSummary (int price) {
         tName();
-        addWhippedCream();
-        addChocolate();
         String message = "Name: " + name + "\nAdd whipped cream? " + hasWhippedCream + "\nAdd chocolate? " + hasChocolate + "\nQuantity: " + quantity + "\nTotal: " + price + " $" + "\nThank you!";
         return message;
     }
